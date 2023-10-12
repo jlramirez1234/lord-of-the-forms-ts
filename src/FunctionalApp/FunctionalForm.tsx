@@ -1,10 +1,10 @@
 import { ErrorMessage } from "../ErrorMessage";
 
-const firstNameErrorMessage = "First name must be at least 2 characters long";
-const lastNameErrorMessage = "Last name must be at least 2 characters long";
-const emailErrorMessage = "Email is Invalid";
-const cityErrorMessage = "State is Invalid";
-const phoneNumberErrorMessage = "Invalid Phone Number";
+const firstNameErrorMessage:string = "First name must be at least 2 characters long";
+const lastNameErrorMessage:string = "Last name must be at least 2 characters long";
+const emailErrorMessage:string = "Email is Invalid";
+const cityErrorMessage:string = "State is Invalid";
+const phoneNumberErrorMessage:string = "Invalid Phone Number";
 
 export const FunctionalForm = () => {
   return (
