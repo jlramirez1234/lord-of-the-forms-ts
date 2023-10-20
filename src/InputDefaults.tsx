@@ -1,15 +1,10 @@
 import React from 'react'
 
-interface dataInput {
-    name: string;
-
-}
-
-export default function InputDefaults({name, onChange, value}) {
+export default function InputDefaults({labelData, inputProps}) {
   return (
     <div className="input-wrap">
-        <label>{"First Name"}:</label>
-        <input placeholder="Bilbo" />
+        <label>{labelData}:</label>
+        <input {...inputProps}/>
       </div>
   )
 }

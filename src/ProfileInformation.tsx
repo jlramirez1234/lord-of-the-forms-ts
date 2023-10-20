@@ -1,5 +1,6 @@
 import { UserInformation } from "./types";
 
+
 export const InfoRow = ({ label, value }: { label: string; value: string }) => {
   return (
     <div>
@@ -10,6 +11,8 @@ export const InfoRow = ({ label, value }: { label: string; value: string }) => {
     </div>
   );
 };
+
+
 export const ProfileInformation = ({
   userData,
 }: {
