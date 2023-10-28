@@ -3,6 +3,8 @@ import { ErrorMessage } from "../ErrorMessage";
 import InputDefaults from "../InputDefaults";
 import { isEmailValid } from "../utils/validations";
 import FunctionalPhoneInput from "./FunctionalPhoneInput";
+import { PhoneString } from "./FunctionalPhoneInput";
+
 
 const firstNameErrorMessage: string = "First name must be at least 2 characters long";
 const lastNameErrorMessage: string = "Last name must be at least 2 characters long";
@@ -15,22 +17,30 @@ export const FunctionalForm = ({ handleUserInformation }) => {
   const [lastNameInput, setLastNameInput] = useState("");
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
+  const [phone, setPhoneState] = useState<PhoneString>("")
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [cityError, setCityError] = useState(false);
+  const [correctPhone, setCorrectPhone] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormSubmitted(true);
+    const [firstNumber, secondNumber, thirdNumber, fourthNumber] = phone.map(Number);
+    const formattedPhone = [firstNumber, secondNumber, thirdNumber, fourthNumber];
+    const isPhoneNumeric = phone.every((numStr) => !isNaN(Number(numStr)));
 
     handleUserInformation({
       firstName: firstNameInput,
       lastName: lastNameInput,
       email: email,
       city: city,
+      phone: formattedPhone
     });
+
+    
 
     if (firstNameInput.length <= 2) {
       setFirstNameError(true);
@@ -56,8 +66,13 @@ export const FunctionalForm = ({ handleUserInformation }) => {
       setEmailError(true);
     } else {
       setEmailError(false);
-    }
+    }   
 
+    if(!isPhoneNumeric){
+      setCorrectPhone(true)
+    } else {
+      setCorrectPhone(false)
+    }
     
   };
 
@@ -72,6 +87,7 @@ export const FunctionalForm = ({ handleUserInformation }) => {
     setCityError(false);
   };
 
+  
   return (
     <form onSubmit={handleSubmit}>
       <u>
@@ -134,10 +150,16 @@ export const FunctionalForm = ({ handleUserInformation }) => {
       {formSubmitted && cityError && (
         <ErrorMessage message={cityErrorMessage} show={true} />
       )}
+      
+      
 
-      <FunctionalPhoneInput />
+      <FunctionalPhoneInput setPhoneState={setPhoneState}/>
+
+      {formSubmitted && correctPhone &&(
       <ErrorMessage message={phoneNumberErrorMessage} show={false} />
+      )}
 
+      
       <input type="submit" value="Submit" />
     </form>
   );

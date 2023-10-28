@@ -30,7 +30,15 @@ export const ProfileInformation = ({
       </>
     );
   }
+
   const { email, firstName, lastName, phone, city } = userData;
+
+  
+  const formattedPhone =
+    phone.length === 4
+      ? `${phone[0]}-${phone[1]}-${phone[2]}-${phone[3]}`
+      : phone; 
+
   return (
     <>
       <u>
@@ -41,8 +49,7 @@ export const ProfileInformation = ({
         <InfoRow label="First Name" value={firstName} />
         <InfoRow label="Last Name" value={lastName} />
         <InfoRow label="City" value={city} />
-        {/* You will need to format the string "nnnnnnn" as "nn-nn-nn-n" */}
-        <InfoRow label="Phone" value={"12-34-56-7"} />
+        <InfoRow label="Phone" value={formattedPhone} />
       </div>
     </>
   );

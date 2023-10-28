@@ -3,7 +3,7 @@ import { useState, useRef, ChangeEventHandler } from 'react';
 
 export type PhoneString = [string, string, string, string]
 
-export default function FunctionalPhoneInput({ setPhoneState } : {setPhoneState: (input: PhoneString) => void}) {
+export default function FunctionalPhoneInput({ setPhoneState } : {PhoneString}) {
     const [phoneInputState, setPhoneInputState] = useState(["", "", "", ""]);
 
 
@@ -22,7 +22,7 @@ export default function FunctionalPhoneInput({ setPhoneState } : {setPhoneState:
         const nextRef = refs[index + 1];
         const prevRef = refs[index - 1];
         const value = e.target.value;
-        
+
 
 
         if (value.length > currentMaxLength) {
